@@ -51,38 +51,27 @@ class PlaceButton extends Component {
     this.setState({
       randomPlace: place
     });
-    console.log(this.state.places);
-    console.log(this.state.randomPlace);
-    console.log(this.state.latitude);
-    console.log(this.state.longitude);
   }
 
-  _getOne() {
+  _getLocationFirst() {
     return new Promise((resolve, reject) => {
       setTimeout(() => resolve(this._getCurrentLocation()), 200)
     })
   }
 
-  _getTwo() {
+  _getPlacesSecond() {
     return new Promise((resolve, reject) => {
       setTimeout(() => resolve(this._getPlaces()), 200)
     })
   }
 
   async _appStartUp() {
-    await this._getOne();
-    await this._getTwo();
+    await this._getLocationFirst();
+    await this._getPlacesSecond();
   }
   
   componentDidMount() {
-    // Promise.resolve(this._getCurrentLocation())
-    // .then(() => Promise.resolve(this._getPlaces()))
-    // this._getCurrentLocation();
     this._appStartUp();
-    console.log(this.state.places);
-    console.log(this.state.randomPlace);
-    console.log(this.state.latitude);
-    console.log(this.state.longitude);
   }
 
   render() {
