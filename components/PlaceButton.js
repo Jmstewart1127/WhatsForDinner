@@ -75,36 +75,29 @@ class PlaceButton extends Component {
     this._appStartUp();
   }
 
-  renderPlaces() {
-    if (this.props.places) {
-      return this.props.places.map(p => {
-        return(
-          <Text>{p}</Text>
-        );
-      });
-    }
-  }
-
   render() {
     const randomlySelectAPlace = () => { this._randomlySelectAPlace() }
     return(
       <View>
-        <Text>{this.state.randomPlace}</Text>
+        <Text style={styles.randomPlace}>{this.state.randomPlace}</Text>
         <Button
           onPress={randomlySelectAPlace}
           title="Whats For Dinner?"
           color="#841584"
         />
-        {this.renderPlaces()}
       </View>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    places: state.places
+const styles = {
+  randomPlace: {
+    paddingTop: 50,
+    paddingBottom: 50,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    fontSize: 18,
   }
 }
 
-export default connect(mapStateToProps, null)(PlaceButton);
+export default PlaceButton;
