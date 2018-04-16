@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Text, TouchableOpacity, View, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 
 class PlaceButton extends Component {
   constructor(props) {
@@ -74,6 +75,16 @@ class PlaceButton extends Component {
     this._appStartUp();
   }
 
+  renderPlaces() {
+    if (this.props.places) {
+      return this.props.places.map(p => {
+        return(
+          <Text>{p}</Text>
+        );
+      });
+    }
+  }
+
   render() {
     const randomlySelectAPlace = () => { this._randomlySelectAPlace() }
     return(
@@ -84,9 +95,16 @@ class PlaceButton extends Component {
           title="Whats For Dinner?"
           color="#841584"
         />
+        {this.renderPlaces()}
       </View>
     );
   }
 }
 
-export default PlaceButton;
+function mapStateToProps(state) {
+  return {
+    places: state.places
+  }
+}
+
+export default connect(mapStateToProps, null)(PlaceButton);

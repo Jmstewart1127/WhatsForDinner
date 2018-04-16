@@ -1,13 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
 import PlaceButton from './components/PlaceButton';
+
+const store = configureStore({});
 
 export default class App extends React.Component {
   render() {
+    const store = configureStore({});
     return (
-      <View style={styles.container}>
-        <PlaceButton/>
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <PlaceButton/>
+        </View>
+      </Provider>
     );
   }
 }
